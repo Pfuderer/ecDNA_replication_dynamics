@@ -31,7 +31,7 @@ DNAscent forkSense (version 3.1.2) was run using `--markOrigins --markTerminatio
 
 ### :open_file_folder: 6. forkSense to csv conversion
 
-The forkSense output `.bed` files were converted to a `.csv` file (using a custom [python script](https://github.com/Pfuderer/ecDNA_replication_dynamics_dev/blob/main/01_DNAscent_csv/createCsv_forks.py))and fork speed was calculated for all forks that were >= 2000 bp from the end of mapped read, to avoid understimation of fork speed for forks where the fork ran over the end of the mapped read. For fork speed calculation, we used a pulse time of 12 minutes (6 minutes EdU, 6 minutes BrdU).
+The forkSense output `.bed` files were converted to a `.csv` file (using a custom [python script](https://github.com/Pfuderer/ecDNA_replication_dynamics/blob/main/01_DNAscent_csv/createCsv_forks.py))and fork speed was calculated for all forks that were >= 2000 bp from the end of mapped read, to avoid understimation of fork speed for forks where the fork ran over the end of the mapped read. For fork speed calculation, we used a pulse time of 12 minutes (6 minutes EdU, 6 minutes BrdU).
 
 **left/right forks: `createCsv_forks.py` file names after processing DNAscent forkSense output for hg38 or ecDNA mapped forks:**
 
@@ -54,7 +54,7 @@ The forkSense output `.bed` files were converted to a `.csv` file (using a custo
 
 ### :bar_chart: 7. Visualisation and statistics
 
-Replication fork speed, stall scores, origin GC content and origin firing alongside other statistics were calculated using Python. The [Jupyter notebook](https://github.com/Pfuderer/ecDNA_replication_dynamics_dev/blob/main/02_Jupyter_notebook/analysis.ipynb) contains all visualisation and statistics steps for all main and supplementary figures except for circular plots which were created in R (see section 8).
+Replication fork speed, stall scores, origin GC content and origin firing alongside other statistics were calculated using Python. The [Jupyter notebook](https://github.com/Pfuderer/ecDNA_replication_dynamics/blob/main/02_Jupyter_notebook/analysis.ipynb) contains all visualisation and statistics steps for all main and supplementary figures except for circular plots which were created in R (see section 8).
 
 ### :large_blue_circle: 8. Circular ecDNA visualisations
 
@@ -63,18 +63,18 @@ We used the [circlize package](https://doi.org/10.1093/bioinformatics/btu393) fo
 
 | Element            | Source        | File       |
 |--------------------|---------------|------------|
-| origins            | DNAscent ([custom python script](https://github.com/Pfuderer/ecDNA_replication_dynamics_dev/blob/main/01_DNAscent_csv/createCsv_origins.py))    | 20240503_directories_XX_ecDNA_origins.csv |
-| forks & stall scores | DNAscent ([custom python script](https://github.com/Pfuderer/ecDNA_replication_dynamics_dev/blob/main/01_DNAscent_csv/createCsv_forks.py))   | 20240531_directories_df_XX_ecDNA_HU_iqr_filtered.csv |
+| origins            | DNAscent ([custom python script](https://github.com/Pfuderer/ecDNA_replication_dynamics/blob/main/01_DNAscent_csv/createCsv_origins.py))    | 20240503_directories_XX_ecDNA_origins.csv |
+| forks & stall scores | DNAscent ([custom python script](https://github.com/Pfuderer/ecDNA_replication_dynamics/blob/main/01_DNAscent_csv/createCsv_forks.py))   | 20240531_directories_df_XX_ecDNA_HU_iqr_filtered.csv |
 | read coverage      | Minimap2 `.bam` | 202410017_XX_ecDNA_coverage_bam_filtered.csv |
 | SNS-seq origins    | Akerman 2020  | [Table1a_Origin_coordinates in Supplementary Data 1](https://www.nature.com/articles/s41467-020-18527-0#Sec33) |
 | Ini-seq origins    | Guilbaud 2022 | [GSM5658908_Ini-seq2.called.replication.origins.bed](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM5658908) |
-| GC-content         | ecDNA reference map & [Python script](https://github.com/Pfuderer/ecDNA_replication_dynamics_dev/blob/main/02_Jupyter_notebook/gc_content_ecDNA.py) `gc_content_ecDNA.py` | 20240529_gc_content_5000_bp.csv |
-| G4 scores          | [G4 Hunter](https://academic.oup.com/nar/article/44/4/1746/1854457) | [input file](https://github.com/Pfuderer/ecDNA_replication_dynamics_dev/blob/main/00_resources/basic_ecDNAseq_indexfile_formatted.fasta) |
+| GC-content         | ecDNA reference map & [Python script](https://github.com/Pfuderer/ecDNA_replication_dynamics/blob/main/02_Jupyter_notebook/gc_content_ecDNA.py) `gc_content_ecDNA.py` | 20240529_gc_content_5000_bp.csv |
+| G4 scores          | [G4 Hunter](https://academic.oup.com/nar/article/44/4/1746/1854457) | [input file](https://github.com/Pfuderer/ecDNA_replication_dynamics/blob/main/00_resources/basic_ecDNAseq_indexfile_formatted.fasta) |
 | gene locations     | [hg38 genome assembly](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.40_GRCh38.p14/) | GCF_000001405.40_GRCh38.p14_genomic.fna |
 
-The custom ecDNA reference map backbone for the circlize package was created using a [custom Python script](https://github.com/Pfuderer/ecDNA_replication_dynamics_dev/blob/main/02_Jupyter_notebook/create_cytoband_file.py) `create_cytoband_file.py` based on the ecDNA reference map `basic_ecDNAseq_indexfile_formatted.fasta` from AmpliconArchitect and is available as `basic_ecDNAseq_indexfile_formatted_cytoband.txt`.
+The custom ecDNA reference map backbone for the circlize package was created using a [custom Python script](https://github.com/Pfuderer/ecDNA_replication_dynamics/blob/main/02_Jupyter_notebook/create_cytoband_file.py) `create_cytoband_file.py` based on the ecDNA reference map `basic_ecDNAseq_indexfile_formatted.fasta` from AmpliconArchitect and is available as `basic_ecDNAseq_indexfile_formatted_cytoband.txt`.
 
-For origin locations, replication fork speed, stall scores and fork orientation, the interquartile range (IQR) filtered `.csv`files created in the [Jupyter notebook](https://github.com/Pfuderer/ecDNA_replication_dynamics_dev/blob/main/02_Jupyter_notebook/analysis.ipynb) were used as input. XX in the file name represents either DM, HSR or DM_HU.
+For origin locations, replication fork speed, stall scores and fork orientation, the interquartile range (IQR) filtered `.csv`files created in the [Jupyter notebook](https://github.com/Pfuderer/ecDNA_replication_dynamics/blob/main/02_Jupyter_notebook/analysis.ipynb) were used as input. XX in the file name represents either DM, HSR or DM_HU.
 
 G4 scores for the ecDNA reference map were calculated using [G4 Hunter](https://academic.oup.com/nar/article/44/4/1746/1854457) which has a [web application](https://academic.oup.com/bioinformatics/article/35/18/3493/5306941) and Python code to run G4Hunter is available on [GitHub](https://github.com/AnimaTardeb/G4Hunter.git). We ran the Python script with parameters `-w 25 -s 1.0`. We then filtered for G4 calls using a threshold of >= 1.5.
 
@@ -85,12 +85,12 @@ The read coverage was obtained by extracting reads that passed the minimum DNAsc
 
 ### :snake: Python version
 
-Steps 6, 7 and 8 were performed using Python version 3.11.5 in a virtual environment, all required packages for installation are listed in the `requirements.txt` [file](https://github.com/Pfuderer/ecDNA_replication_dynamics_dev/blob/main/requirements.txt).
+Steps 6, 7 and 8 were performed using Python version 3.11.5 in a virtual environment, all required packages for installation are listed in the `requirements.txt` [file](https://github.com/Pfuderer/ecDNA_replication_dynamics/blob/main/requirements.txt).
 
 
 ### :desktop_computer: R version
 
-All circular plots were created using R version 4.3.3 in a R Markdown script which is available [here](https://github.com/Pfuderer/ecDNA_replication_dynamics_dev/blob/main/03_R_circos_plots/ecDNA_replication.md). The file also has a list with all package versions at the end of the script.
+All circular plots were created using R version 4.3.3 in a R Markdown script which is available [here](https://github.com/Pfuderer/ecDNA_replication_dynamics/blob/main/03_R_circos_plots/ecDNA_replication.md). The file also has a list with all package versions at the end of the script.
 
 # :paperclip: Citation
 
